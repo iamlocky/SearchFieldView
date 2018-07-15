@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="SearchFieldView">
+        <attr name="searchViewHint" format="string"></attr>
+        <attr name="searchViewBackground" format="reference"></attr>
+        <attr name="searchEditTextBackground" format="reference"></attr>
+        <attr name="searchEditTextSize" format="dimension"></attr>
+        <attr name="searchEditTextColor" format="color"></attr>
+        <attr name="historyTextSize" format="dimension"></attr>
+        <attr name="historyTextColor" format="color"></attr>
+    </declare-styleable>
+</resources>
