@@ -138,7 +138,7 @@ public class SearchFieldView extends LinearLayout {
         editText.setLayoutParams(layoutParams);
 
         editText.setAlpha(0.80f);
-        editText.setGravity(Gravity.CENTER);
+        editText.setGravity(Gravity.CENTER_VERTICAL);
         editText.setTextColor(editTextColor);
         editText.setTextSize(TypedValue.COMPLEX_UNIT_PX,editTextSize);
         ViewCompat.setBackground(editText,ContextCompat.getDrawable(context,R.drawable.shape_white_radius10));
