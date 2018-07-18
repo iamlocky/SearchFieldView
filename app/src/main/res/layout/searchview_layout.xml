@@ -3,56 +3,54 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:background="@color/colorPrimaryLight"
+    android:gravity="center_vertical"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:orientation="horizontal">
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <FrameLayout
+        android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:background="@color/colorPrimaryLight"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
-
-        <FrameLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical">
+        android:layout_weight="1"
+        android:orientation="vertical">
 
 
-            <LinearLayout
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <EditText
+                android:id="@+id/edittext_searchfield"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <EditText
-                    android:id="@+id/edittext_searchfield"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:padding="5dp"
-                    android:background="@drawable/shape_white_radius10"
-                    android:hint="edittext" />
-            </LinearLayout>
-
-            <android.support.v7.widget.AppCompatImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_gravity="end|center_vertical"
-                android:layout_margin="10dp"
-                android:alpha="0.7"
-                android:clickable="true"
-                app:srcCompat="@drawable/vector_drawable_close" />
-
-        </FrameLayout>
-
+                android:layout_height="match_parent"
+                android:padding="5dp"
+                android:background="@drawable/shape_white_radius10"
+                android:hint="edittext" />
+        </LinearLayout>
 
         <android.support.v7.widget.AppCompatImageView
-            android:id="@+id/iv_btn_search"
-            android:layout_width="40dp"
-            android:layout_height="match_parent"
-            android:background="@drawable/btn_bg"
+            android:id="@+id/iv_btn_clear"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="end|center_vertical"
+            android:layout_margin="10dp"
+            android:alpha="0.5"
             android:clickable="true"
-            android:padding="5dp"
-            android:scaleType="centerInside"
-            app:srcCompat="@drawable/vector_drawable_search" />
+            app:srcCompat="@drawable/vector_drawable_close" />
 
-    </LinearLayout>
+    </FrameLayout>
+
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/iv_btn_search"
+        android:elevation="2dp"
+
+        android:layout_width="40dp"
+        android:layout_height="match_parent"
+        android:background="@drawable/btn_bg"
+        android:clickable="true"
+        android:padding="5dp"
+        android:scaleType="centerInside"
+        app:srcCompat="@drawable/vector_drawable_search" />
+
 </LinearLayout>
