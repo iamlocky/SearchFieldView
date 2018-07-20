@@ -211,7 +211,7 @@ public class SearchFieldView extends LinearLayout {
             public void run() {
                 try {
                     Log.i(TAG, "run:queryThread done");
-                    List list=query(s);
+                    List list = query(s);
                     simpleListener.done(list);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -248,7 +248,7 @@ public class SearchFieldView extends LinearLayout {
             public void onFocusChange(View v, boolean hasFocus) {
                 if (hasFocus) {
                     queryAndShowPopupWindow();
-                }else {
+                } else {
                     InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
                     if (imm != null) {
                         imm.hideSoftInputFromWindow(editText.getWindowToken(), 0);
@@ -304,7 +304,7 @@ public class SearchFieldView extends LinearLayout {
         });
     }
 
-    public void queryAndShowPopupWindow(){
+    public void queryAndShowPopupWindow() {
         queryInBackground(editText.getText().toString(), new SimpleListener() {
             @Override
             public void done(Object data) {
@@ -325,7 +325,7 @@ public class SearchFieldView extends LinearLayout {
 
     private void showPopup() {
         if (popupWindow != null && popupWindow.isShowing()) {
-        }else {
+        } else {
             popupView = LayoutInflater.from(context).inflate(R.layout.popuphistories_layout, null);
             popupWindow = new PopupWindow(popupView, LayoutParams.MATCH_PARENT, 300, false);
             popupWindow.setBackgroundDrawable(new ColorDrawable(ContextCompat.getColor(context, R.color.white)));
@@ -343,8 +343,8 @@ public class SearchFieldView extends LinearLayout {
             return;
         popupWindow.showAtLocation(getRootView(), Gravity.TOP, pos[0], pos[1] + this.getHeight());
 
-        if (historyList.size()>0) {
-            ((TextView)popupView.findViewById(R.id.popuptext)).setText(Arrays.toString(historyList.toArray()));
+        if (historyList.size() > 0) {
+            ((TextView) popupView.findViewById(R.id.popuptext)).setText(Arrays.toString(historyList.toArray()));
         }
         popupView.findViewById(R.id.btn_close).setOnClickListener(new OnClickListener() {
             @Override
@@ -354,32 +354,5 @@ public class SearchFieldView extends LinearLayout {
         });
     }
 
-    public Object loadClass(Object popupWindow) {
-        try {
-            Class<?> class1 = Class.forName("android.widget.PopupWindow");
-            Field field = class1.getDeclaredField("mBackgroundView");
-            Log.i(TAG, "loadClass: " + field.toString());
-            field.setAccessible(true);
-            return field.get(popupWindow);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    private Object getPrivateValue(Object object, String fieldName) {
-
-        try {
-            Field field = object.getClass().getDeclaredField(fieldName);
-            // 参数值为true，打开禁用访问控制检查
-            //setAccessible(true) 并不是将方法的访问权限改成了public，而是取消java的权限控制检查。
-            //所以即使是public方法，其accessible 属相默认也是false
-            field.setAccessible(true);
-            return field.get(object);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
 
 }

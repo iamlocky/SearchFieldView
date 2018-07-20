@@ -16,7 +16,6 @@ class SearchViewDemoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         view = View.inflate(applicationContext, R.layout.activity_searchviewdemo, null)
         setContentView(view)
-//        showPopup()
         ll_background.setOnLongClickListener {
             showPopup()
             true
