@@ -2,89 +2,107 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ll_background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="cn.lockyluo.SearchViewDemoActivity"
-    android:orientation="vertical"
     android:gravity="top|center_horizontal"
-    android:id="@+id/ll_background"
-    >
+    android:orientation="vertical"
+    tools:context="cn.lockyluo.SearchViewDemoActivity">
 
-    <cn.lockyluo.searchfieldview.SearchFieldView
+    <cn.lockyluo.searchview.SearchFieldView
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        app:searchViewBackground="@color/colorPrimaryLight"
-        app:searchViewHint="搜索"
         app:searchEditTextSize="15sp"
-        >
+        app:searchViewBackground="@color/colorPrimaryLight"
+        app:searchViewHint="搜索">
 
-    </cn.lockyluo.searchfieldview.SearchFieldView>
-<TextView
-    android:layout_width="match_parent"
-    android:layout_height="25dp"
-    android:text="null"
-    android:textSize="20sp"
-    android:textColor="@color/colorAccent"
-    android:gravity="center"/>
+    </cn.lockyluo.searchview.SearchFieldView>
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="25dp"
+        android:gravity="center"
         android:text="null"
-        android:textSize="20sp"
         android:textColor="@color/colorAccent"
-        android:gravity="center"/><TextView
-    android:layout_width="match_parent"
-    android:layout_height="25dp"
-    android:text="null"
-    android:textSize="20sp"
-    android:textColor="@color/colorAccent"
-    android:gravity="center"/><TextView
-    android:layout_width="match_parent"
-    android:layout_height="25dp"
-    android:text="null"
-    android:textSize="20sp"
-    android:textColor="@color/colorAccent"
-    android:gravity="center"/><TextView
-    android:layout_width="match_parent"
-    android:layout_height="25dp"
-    android:text="null"
-    android:textSize="20sp"
-    android:textColor="@color/colorAccent"
-    android:gravity="center"/><TextView
-    android:layout_width="match_parent"
-    android:layout_height="25dp"
-    android:text="null"
-    android:textSize="20sp"
-    android:textColor="@color/colorAccent"
-    android:gravity="center"/><TextView
-    android:layout_width="match_parent"
-    android:layout_height="25dp"
-    android:text="null"
-    android:textSize="20sp"
-    android:textColor="@color/colorAccent"
-    android:gravity="center"/><TextView
-    android:layout_width="match_parent"
-    android:layout_height="25dp"
-    android:text="null"
-    android:textSize="20sp"
-    android:textColor="@color/colorAccent"
-    android:gravity="center"/><TextView
-    android:layout_width="match_parent"
-    android:layout_height="25dp"
-    android:text="null"
-    android:textSize="20sp"
-    android:textColor="@color/colorAccent"
-    android:gravity="center"/><TextView
-    android:layout_width="match_parent"
-    android:layout_height="25dp"
-    android:text="null"
-    android:textSize="20sp"
-    android:textColor="@color/colorAccent"
-    android:gravity="center"/><TextView
-    android:layout_width="match_parent"
-    android:layout_height="25dp"
-    android:text="null"
-    android:textSize="20sp"
-    android:textColor="@color/colorAccent"
-    android:gravity="center"/>
+        android:textSize="20sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:gravity="center"
+        android:text="null"
+        android:textColor="@color/colorAccent"
+        android:textSize="20sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:gravity="center"
+        android:text="null"
+        android:textColor="@color/colorAccent"
+        android:textSize="20sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:gravity="center"
+        android:text="null"
+        android:textColor="@color/colorAccent"
+        android:textSize="20sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:gravity="center"
+        android:text="null"
+        android:textColor="@color/colorAccent"
+        android:textSize="20sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:gravity="center"
+        android:text="null"
+        android:textColor="@color/colorAccent"
+        android:textSize="20sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:gravity="center"
+        android:text="null"
+        android:textColor="@color/colorAccent"
+        android:textSize="20sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:gravity="center"
+        android:text="null"
+        android:textColor="@color/colorAccent"
+        android:textSize="20sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:gravity="center"
+        android:text="null"
+        android:textColor="@color/colorAccent"
+        android:textSize="20sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:gravity="center"
+        android:text="null"
+        android:textColor="@color/colorAccent"
+        android:textSize="20sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:gravity="center"
+        android:text="null"
+        android:textColor="@color/colorAccent"
+        android:textSize="20sp" />
 </LinearLayout>

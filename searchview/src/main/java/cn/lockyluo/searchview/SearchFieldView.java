@@ -1,7 +1,6 @@
-package cn.lockyluo.searchfieldview;
+package cn.lockyluo.searchview;
 
 import android.annotation.TargetApi;
-import android.app.ActivityManager;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.database.Cursor;
@@ -12,7 +11,6 @@ import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.os.NetworkOnMainThreadException;
 import android.support.annotation.ColorInt;
 import android.support.annotation.Dimension;
 import android.support.annotation.Nullable;
@@ -35,14 +33,10 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
-import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.zip.Inflater;
 
 import cn.lockyluo.utils.HistoryDbHelper;
 import cn.lockyluo.utils.SimpleListener;
@@ -91,7 +85,7 @@ public class SearchFieldView extends LinearLayout {
         view = LayoutInflater.from(context).inflate(R.layout.searchview_layout, this);
 
         historyDbHelper = new HistoryDbHelper(context);
-
+        historyDbHelper.getWritableDatabase();
         initTypedArray(attrs);
 
         initView(context, attrs, defStyleAttr);
@@ -156,9 +150,9 @@ public class SearchFieldView extends LinearLayout {
     }
 
     public void initView(Context context, AttributeSet attributeSet, int defStyleAttr) {
-        editText = (EditText) view.findViewById(R.id.edittext_searchfield);
-        btnSearch = (AppCompatImageView) view.findViewById(R.id.iv_btn_search);
-        btnClear = (AppCompatImageView) view.findViewById(R.id.iv_btn_clear);
+        editText = view.findViewById(R.id.edittext_searchfield);
+        btnSearch = view.findViewById(R.id.iv_btn_search);
+        btnClear = view.findViewById(R.id.iv_btn_clear);
 
         LayoutParams layoutParams = (LinearLayout.LayoutParams) editText.getLayoutParams();
         layoutParams.setMargins(15, 15, 15, 15);
@@ -186,9 +180,12 @@ public class SearchFieldView extends LinearLayout {
             btnClear.setVisibility(VISIBLE);
     }
 
-    private List<String> query(String s) throws Exception {
+    private List<String> query(String s) {
         s = s.trim();
         Cursor cursor = historyDbHelper.query(s);
+        if (cursor==null){
+            return new ArrayList<>();
+        }
         historyList.clear();
         while (cursor.moveToNext()) {
             historyList.add(cursor.getString(cursor.getColumnIndex("name")));
@@ -308,7 +305,9 @@ public class SearchFieldView extends LinearLayout {
         queryInBackground(editText.getText().toString(), new SimpleListener() {
             @Override
             public void done(Object data) {
-                showPopupDelay();
+                if (data!=null) {
+                    showPopupDelay();
+                }
                 Log.i(TAG, "afterTextChanged: " + Arrays.toString(historyList.toArray()));
             }
         });

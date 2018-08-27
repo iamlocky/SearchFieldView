@@ -7,7 +7,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.PopupWindow
-import cn.lockyluo.searchfieldview.R
+import cn.lockyluo.searchviewdemo.R
 import kotlinx.android.synthetic.main.activity_searchviewdemo.*
 
 class SearchViewDemoActivity : AppCompatActivity() {

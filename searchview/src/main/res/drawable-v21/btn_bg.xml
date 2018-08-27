@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="@color/colorPrimaryLight">
+    <item android:drawable="@drawable/shape_colorprimary_radius10" />
+    <item>
+        <selector xmlns:android="http://schemas.android.com/apk/res/android">
+            <item
+                android:drawable="@drawable/shape_colorprimary_radius10"
+                android:state_enabled="true" />
+            <item
+                android:drawable="@drawable/shape_colorprimarylight_radius10"
+                android:state_enabled="false" />
+
+        </selector>
+    </item>
+</ripple>

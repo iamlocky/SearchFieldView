@@ -27,7 +27,7 @@
                 android:layout_height="match_parent"
                 android:padding="5dp"
                 android:background="@drawable/shape_white_radius10"
-                android:hint="edittext" />
+                android:hint="@string/search_s" />
         </LinearLayout>
 
         <android.support.v7.widget.AppCompatImageView
@@ -44,7 +44,6 @@
 
     <android.support.v7.widget.AppCompatImageView
         android:id="@+id/iv_btn_search"
-        android:elevation="2dp"
 
         android:layout_width="40dp"
         android:layout_height="match_parent"
