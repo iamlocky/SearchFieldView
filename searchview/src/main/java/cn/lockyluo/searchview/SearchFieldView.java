@@ -181,7 +181,10 @@ public class SearchFieldView extends LinearLayout {
     }
 
     private List<String> query(String s) {
-        s = s.trim();
+        if (TextUtils.isEmpty(s)) {
+            s = s.trim();
+        }else
+            s=null;
         Cursor cursor = historyDbHelper.query(s);
         if (cursor==null){
             return new ArrayList<>();
@@ -276,6 +279,7 @@ public class SearchFieldView extends LinearLayout {
             public void onClick(View v) {
                 editText.setText("");
                 changeBtnClear();
+                queryAndShowPopupWindow();
             }
         });
 
@@ -326,7 +330,7 @@ public class SearchFieldView extends LinearLayout {
         if (popupWindow != null && popupWindow.isShowing()) {
         } else {
             popupView = LayoutInflater.from(context).inflate(R.layout.popuphistories_layout, null);
-            popupWindow = new PopupWindow(popupView, LayoutParams.MATCH_PARENT, 300, false);
+            popupWindow = new PopupWindow(popupView, LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT, false);
             popupWindow.setBackgroundDrawable(new ColorDrawable(ContextCompat.getColor(context, R.color.white)));
             popupWindow.getBackground().setAlpha(200);
             popupWindow.setTouchable(true);
@@ -344,6 +348,8 @@ public class SearchFieldView extends LinearLayout {
 
         if (historyList.size() > 0) {
             ((TextView) popupView.findViewById(R.id.popuptext)).setText(Arrays.toString(historyList.toArray()));
+            ((FlowLayout) popupView.findViewById(R.id.flowlayout)).setLables(historyList,false);
+
         }
         popupView.findViewById(R.id.btn_close).setOnClickListener(new OnClickListener() {
             @Override

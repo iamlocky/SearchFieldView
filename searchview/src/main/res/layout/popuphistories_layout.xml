@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="100dp"
     android:orientation="vertical">
 
     <android.support.v7.widget.AppCompatImageView
@@ -23,6 +24,11 @@
             android:gravity="center"/>
 
     </GridLayout>
+
+    <cn.lockyluo.searchview.FlowLayout
+        android:id="@+id/flowlayout"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"></cn.lockyluo.searchview.FlowLayout>
 
 
 </LinearLayout>

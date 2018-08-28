@@ -9,4 +9,11 @@
         <attr name="historyTextSize" format="dimension"></attr>
         <attr name="historyTextColor" format="color"></attr>
     </declare-styleable>
+
+    <declare-styleable name="FlowLayout">
+        <!--    标签之间的间距-->
+        <attr name="lineSpace" format="dimension"/>
+        <!--    每一行之间的间距-->
+        <attr name="rowSpace" format="dimension"/>
+    </declare-styleable>
 </resources>
