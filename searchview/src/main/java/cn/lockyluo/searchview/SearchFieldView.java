@@ -11,12 +11,12 @@ import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.support.annotation.ColorInt;
-import android.support.annotation.Dimension;
-import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.view.ViewCompat;
-import android.support.v7.widget.AppCompatImageView;
+import androidx.annotation.ColorInt;
+import androidx.annotation.Dimension;
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
+import androidx.core.view.ViewCompat;
+import androidx.appcompat.widget.AppCompatImageView;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -334,6 +334,7 @@ public class SearchFieldView extends LinearLayout {
             popupWindow.setBackgroundDrawable(new ColorDrawable(ContextCompat.getColor(context, R.color.white)));
             popupWindow.getBackground().setAlpha(200);
             popupWindow.setTouchable(true);
+            popupWindow.setInputMethodMode(PopupWindow.INPUT_METHOD_NEEDED);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 popupWindow.setElevation(5);
             }
@@ -348,7 +349,14 @@ public class SearchFieldView extends LinearLayout {
 
         if (historyList.size() > 0) {
             ((TextView) popupView.findViewById(R.id.popuptext)).setText(Arrays.toString(historyList.toArray()));
-            ((FlowLayout) popupView.findViewById(R.id.flowlayout)).setLables(historyList,false);
+            FlowLayout flowLayout=popupView.findViewById(R.id.flowlayout);
+            flowLayout.setLables(historyList,false);
+            flowLayout.setOnItemClickListener(new OnItemClickListener() {
+                @Override
+                public void onItemClick(int position, String text) {
+                    editText.setText(text);
+                }
+            });
 
         }
         popupView.findViewById(R.id.btn_close).setOnClickListener(new OnClickListener() {

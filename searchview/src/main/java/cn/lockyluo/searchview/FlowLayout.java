@@ -29,6 +29,17 @@ public class FlowLayout extends ViewGroup {
     //放置标签的集合
     private List<String> lables;
     private List<String> lableSelects;
+    private boolean isMultiSelect=false;
+
+    private OnItemClickListener onItemClickListener;
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
+    }
+
+    public void setMultiSelect(boolean multiSelect) {
+        isMultiSelect = multiSelect;
+    }
 
     public FlowLayout(Context context) {
         this(context, null);
@@ -40,13 +51,11 @@ public class FlowLayout extends ViewGroup {
 
     public FlowLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-
         //获取自定义属性
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.FlowLayout);
         LINE_SPACE = a.getDimensionPixelSize(R.styleable.FlowLayout_lineSpace, 10);
         ROW_SPACE = a.getDimensionPixelSize(R.styleable.FlowLayout_rowSpace, 10);
         a.recycle();
-
     }
 
     /**
@@ -79,7 +88,9 @@ public class FlowLayout extends ViewGroup {
             this.lables = lables;
         }
         if (lables != null && lables.size() > 0) {
-            for (final String lable : lables) {
+            for (int i = 0; i <lables.size() ; i++) {
+                final int index=i;
+                final String lable=lables.get(i);
                 final TextView tv = new TextView(getContext());
                 tv.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT,
                         LayoutParams.WRAP_CONTENT));
@@ -104,13 +115,18 @@ public class FlowLayout extends ViewGroup {
                 tv.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        tv.setSelected(tv.isSelected() ? false : true);
-                        if (tv.isSelected()) {
-                            tv.setTextColor(getResources().getColor(R.color.colorAccent));
-                            lableSelects.add(lable);
-                        } else {
-                            tv.setTextColor(getResources().getColor(R.color.gray));
-                            lableSelects.remove(lable);
+                        if (isMultiSelect) {
+                            tv.setSelected(tv.isSelected() ? false : true);
+                            if (tv.isSelected()) {
+                                tv.setTextColor(getResources().getColor(R.color.colorAccent));
+                                lableSelects.add(lable);
+                            } else {
+                                tv.setTextColor(getResources().getColor(R.color.gray));
+                                lableSelects.remove(lable);
+                            }
+                        }
+                        if (onItemClickListener!=null){
+                            onItemClickListener.onItemClick(index,tv.getText().toString());
                         }
                     }
                 });
