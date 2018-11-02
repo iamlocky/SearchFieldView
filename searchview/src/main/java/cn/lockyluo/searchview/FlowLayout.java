@@ -38,6 +38,7 @@ public class FlowLayout extends ViewGroup {
         this.onItemClickListener = onItemClickListener;
     }
 
+    //是否多选模式
     public void setMultiSelect(boolean multiSelect) {
         isMultiSelect = multiSelect;
     }
@@ -119,7 +120,7 @@ public class FlowLayout extends ViewGroup {
                     @Override
                     public void onClick(View v) {
                         if (isMultiSelect) {
-                            tv.setSelected(tv.isSelected() ? false : true);
+                            tv.setSelected(!tv.isSelected());
                             if (tv.isSelected()) {
                                 tv.setTextColor(getResources().getColor(R.color.colorAccent));
                                 lableSelects.add(lable);
@@ -160,7 +161,6 @@ public class FlowLayout extends ViewGroup {
         int heightSize = MeasureSpec.getSize(heightMeasureSpec);
 
         //这里的宽度建议使用match_parent或者具体值，当然当使用wrap_content的时候没有重写的话也是match_parent所以这里的宽度就直接使用测量的宽度
-        int width = widthSize;
 
         int height;
         //判断宽度
@@ -168,7 +168,7 @@ public class FlowLayout extends ViewGroup {
             height = heightSize;
         } else {
             int row = 1;
-            int widthSpace = width; //宽度剩余空间
+            int widthSpace = widthSize; //宽度剩余空间
             for (int i = 0; i < getChildCount(); i++) {
                 View view = getChildAt(i);
                 //获取标签宽度
@@ -178,7 +178,7 @@ public class FlowLayout extends ViewGroup {
                     widthSpace -= childW;
                 } else {
                     row++;
-                    widthSpace = width - childW;
+                    widthSpace = widthSize - childW;
                 }
                 //减去两边间距
                 widthSpace -= LINE_SPACE;
@@ -193,7 +193,7 @@ public class FlowLayout extends ViewGroup {
         }
 
         //保存测量高度
-        setMeasuredDimension(width, height);
+        setMeasuredDimension(widthSize, height);
     }
 
     /**

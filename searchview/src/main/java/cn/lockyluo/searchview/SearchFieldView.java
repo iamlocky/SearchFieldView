@@ -106,13 +106,13 @@ public class SearchFieldView extends LinearLayout {
         int width = MeasureSpec.getSize(widthMeasureSpec);
         int height = MeasureSpec.getSize(heightMeasureSpec);
         if (widMode == MeasureSpec.AT_MOST) {
-            Rect bounds = new Rect();
+            Rect bounds = rect;
             textPaint.getTextBounds(hint, 0, hint.length(), bounds);
             width = bounds.width() + 10 + getPaddingLeft() + getPaddingRight();
         }
 
         if (heiMode == MeasureSpec.AT_MOST) {
-            Rect bounds = new Rect();
+            Rect bounds = rect;
             textPaint.getTextBounds(hint, 0, hint.length(), bounds);
             height = bounds.height() + 10 + getPaddingTop() + getPaddingBottom();
         }
@@ -318,8 +318,7 @@ public class SearchFieldView extends LinearLayout {
     }
 
     private void showPopup() {
-        if (popupWindow != null && popupWindow.isShowing()) {
-        } else {
+        if (popupWindow == null || !popupWindow.isShowing()) {
             popupView = LayoutInflater.from(context).inflate(R.layout.popuphistories_layout, null);
             popupWindow = new PopupWindow(popupView, LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT, false);
             popupWindow.setBackgroundDrawable(new ColorDrawable(ContextCompat.getColor(context, R.color.white)));
