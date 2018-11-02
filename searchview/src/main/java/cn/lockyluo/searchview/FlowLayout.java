@@ -4,6 +4,7 @@ package cn.lockyluo.searchview;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.View;
@@ -29,7 +30,7 @@ public class FlowLayout extends ViewGroup {
     //放置标签的集合
     private List<String> lables;
     private List<String> lableSelects;
-    private boolean isMultiSelect=false;
+    private boolean isMultiSelect = false;
 
     private OnItemClickListener onItemClickListener;
 
@@ -88,10 +89,12 @@ public class FlowLayout extends ViewGroup {
             this.lables = lables;
         }
         if (lables != null && lables.size() > 0) {
-            for (int i = 0; i <lables.size() ; i++) {
-                final int index=i;
-                final String lable=lables.get(i);
+            for (int i = 0; i < lables.size(); i++) {
+                final int index = i;
+                final String lable = lables.get(i);
                 final TextView tv = new TextView(getContext());
+                tv.setSingleLine(true);
+                tv.setEllipsize(TextUtils.TruncateAt.END);
                 tv.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT,
                         LayoutParams.WRAP_CONTENT));
                 tv.setText(lable);
@@ -99,7 +102,7 @@ public class FlowLayout extends ViewGroup {
                 tv.setBackgroundResource(R.drawable.shape_item_lable_bg);
                 tv.setTextColor(Color.BLACK);
                 tv.setGravity(Gravity.CENTER);
-                int padding= DisplayUtils.dp2px(getContext(),5);
+                int padding = DisplayUtils.dp2px(getContext(), 5);
                 tv.setPadding(padding, padding, padding, padding);
 
                 //判断是否选中
@@ -125,8 +128,8 @@ public class FlowLayout extends ViewGroup {
                                 lableSelects.remove(lable);
                             }
                         }
-                        if (onItemClickListener!=null){
-                            onItemClickListener.onItemClick(index,tv.getText().toString());
+                        if (onItemClickListener != null) {
+                            onItemClickListener.onItemClick(index, tv.getText().toString());
                         }
                     }
                 });
@@ -181,7 +184,10 @@ public class FlowLayout extends ViewGroup {
                 widthSpace -= LINE_SPACE;
             }
             //获取子控件的高度
-            int childH = getChildAt(0).getMeasuredHeight();
+            int childH = 0;
+            if (getChildAt(0) != null) {
+                childH = getChildAt(0).getMeasuredHeight();
+            }
             //测算最终所需要的高度
             height = (childH * row) + (row - 1) * ROW_SPACE;
         }

@@ -56,6 +56,7 @@ public class SearchFieldView extends LinearLayout {
     private String hint;
     private Drawable background;
     private Drawable editTextBackground;
+    private Rect rect=new Rect();
     private @Dimension
     int editTextSize = 10;
     private @Dimension
@@ -104,7 +105,6 @@ public class SearchFieldView extends LinearLayout {
         int heiMode = MeasureSpec.getMode(heightMeasureSpec);
         int width = MeasureSpec.getSize(widthMeasureSpec);
         int height = MeasureSpec.getSize(heightMeasureSpec);
-
         if (widMode == MeasureSpec.AT_MOST) {
             Rect bounds = new Rect();
             textPaint.getTextBounds(hint, 0, hint.length(), bounds);
@@ -199,7 +199,7 @@ public class SearchFieldView extends LinearLayout {
 
     Thread queryThread;
 
-    public void queryInBackground(final String s, final SimpleListener simpleListener) {
+    public void queryInBackground(final String s, final SimpleListener<List> simpleListener) {
         if (queryThread != null) {
             if (queryThread.isAlive())
                 return;
@@ -236,13 +236,7 @@ public class SearchFieldView extends LinearLayout {
 
 
     public void initListeners() {
-        editText.setOnTouchListener(new OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
 
-                return false;
-            }
-        });
         editText.setOnFocusChangeListener(new OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -286,6 +280,9 @@ public class SearchFieldView extends LinearLayout {
         btnSearch.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (popupWindow!=null&&popupWindow.isShowing()){
+                    popupWindow.dismiss();
+                }
                 String s = editText.getText().toString();
                 if (!TextUtils.isEmpty(s)) {
                     insert(s);
@@ -296,23 +293,17 @@ public class SearchFieldView extends LinearLayout {
             }
         });
 
-        btnSearch.setOnLongClickListener(new OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                historyDbHelper.deleteAllData();
-                return true;
-            }
-        });
+
     }
 
     public void queryAndShowPopupWindow() {
-        queryInBackground(editText.getText().toString(), new SimpleListener() {
+        queryInBackground(editText.getText().toString(), new SimpleListener<List>() {
             @Override
-            public void done(Object data) {
-                if (data!=null) {
+            public void done(List data) {
+                if (data!=null&&data.size()>0) {
                     showPopupDelay();
                 }
-                Log.i(TAG, "afterTextChanged: " + Arrays.toString(historyList.toArray()));
+//                Log.i(TAG, "afterTextChanged: " + Arrays.toString(historyList.toArray()));
             }
         });
     }
@@ -348,7 +339,6 @@ public class SearchFieldView extends LinearLayout {
         popupWindow.showAtLocation(getRootView(), Gravity.TOP, pos[0], pos[1] + this.getHeight());
 
         if (historyList.size() > 0) {
-            ((TextView) popupView.findViewById(R.id.popuptext)).setText(Arrays.toString(historyList.toArray()));
             FlowLayout flowLayout=popupView.findViewById(R.id.flowlayout);
             flowLayout.setLables(historyList,false);
             flowLayout.setOnItemClickListener(new OnItemClickListener() {
@@ -363,6 +353,14 @@ public class SearchFieldView extends LinearLayout {
             @Override
             public void onClick(View v) {
                 popupWindow.dismiss();
+            }
+        });
+
+        popupView.findViewById(R.id.tv_clear).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                popupWindow.dismiss();
+                historyDbHelper.deleteAllData();
             }
         });
     }
